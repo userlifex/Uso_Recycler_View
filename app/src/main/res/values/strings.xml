@@ -15,10 +15,12 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Peliculas</string>
-    <string name="detail_prefix">Peliculas</string>
+    <string name="app_name">BadBunny</string>
+    <string name="detail_prefix">BadBunny</string>
     <string name="action_switch_layout">Switch Layout</string>
     <string name="look_up_word">Look up word in a Browser Search</string>
     <string name="look_up_words">Show Stored Words</string>
-    <string name="word_list_fragment_label">Peliculas de {letter}</string>
+    <string name="word_list_fragment_label">{letter}</string>
+    <string name="go_to_goole">Ver en Google</string>
+    <string name="go_to_yt">Ver en YouTube</string>
 </resources>

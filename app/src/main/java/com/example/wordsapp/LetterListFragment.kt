@@ -33,7 +33,9 @@ import com.example.wordsapp.databinding.FragmentLetterListBinding
  * Entry fragment for the app. Displays a [RecyclerView] of letters.
  */
 class LetterListFragment : Fragment() {
+    private val GRID_SIZE=3
     private var _binding: FragmentLetterListBinding? = null
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -91,7 +93,7 @@ class LetterListFragment : Fragment() {
         if (isLinearLayoutManager) {
             recyclerView.layoutManager = LinearLayoutManager(context)
         } else {
-            recyclerView.layoutManager = GridLayoutManager(context, 2)
+            recyclerView.layoutManager = GridLayoutManager(context, GRID_SIZE)
         }
         recyclerView.adapter = LetterAdapter(requireContext())
     }

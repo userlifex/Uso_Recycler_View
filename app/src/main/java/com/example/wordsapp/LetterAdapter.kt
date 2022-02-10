@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class LetterAdapter(context: Context) :
     RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
 
-    private val list = context.resources.getStringArray(R.array.generosPeliculas).toList()
+    private val list = context.resources.getStringArray(R.array.albumns).toList()
 
 
     // Generates a [CharRange] from 'A' to 'Z' and converts it to a list

@@ -16,7 +16,6 @@
 package com.example.wordsapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,32 +45,22 @@ class WordListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var genero: String
+    private lateinit var album: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Retrieve the LETTER from the Fragment arguments
         arguments?.let {
-            genero = it.getString(LETTER).toString()
+            album = it.getString(LETTER).toString()
         }
     }
 
-    private fun PeliculasComedia():ArrayList<Pelicula>{
-        var lista = ArrayList<Pelicula>()
-        lista.add(Pelicula(R.drawable.american_pie,"American Pie"))
-        lista.add(Pelicula(R.drawable.chiquito_pero_peligroso,"Chiquito pero peligroso"))
-        lista.add(Pelicula(R.drawable.y_donde_estan_las_rubias,"¿Y donde están las Rubias?"))
-        lista.add(Pelicula(R.drawable.no_manches_frida,"No manches Frida"))
-        lista.add(Pelicula(R.drawable.no_se_aceptan_devoluciones,"No se aceptan devoluciones"))
-        lista.add(Pelicula(R.drawable.somos_los_miller,"Somos los miller"))
-        return lista
-    }
-    private fun PeliculasAccion():ArrayList<Pelicula>{
-        var lista = ArrayList<Pelicula>()
-        lista.add(Pelicula(R.drawable.el_rey_escorpion,"El Rey Escorpion"))
-        lista.add(Pelicula(R.drawable.john_wick_2,"John Wick 2"))
-        lista.add(Pelicula(R.drawable.rapido_y_furiosos,"Rapido y Furiosos"))
+    private fun yhlqsmdlg():ArrayList<Cancion>{
+        var lista = ArrayList<Cancion>()
+        lista.add(Cancion("Si veo a tu mama","https://image.europafm.com/clipping/cmsimages02/2020/03/02/233BFB93-443F-4BB4-A34E-EA4B155C29C0/58.jpg", "CPK_IdHe1Yg"))
+        lista.add(Cancion("Si veo a tu mama","https://image.europafm.com/clipping/cmsimages02/2020/03/02/233BFB93-443F-4BB4-A34E-EA4B155C29C0/58.jpg", "CPK_IdHe1Yg"))
+        lista.add(Cancion("Si veo a tu mama","https://image.europafm.com/clipping/cmsimages02/2020/03/02/233BFB93-443F-4BB4-A34E-EA4B155C29C0/58.jpg", "CPK_IdHe1Yg"))
         return lista
     }
 
@@ -87,25 +76,25 @@ class WordListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var list : ArrayList<Pelicula> =  ArrayList<Pelicula>();
+        var list : ArrayList<Cancion> =  ArrayList<Cancion>();
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        Log.d("asas",genero.toString())
-        if (genero.equals("Acción")){
-            list = PeliculasAccion()
-        }else if(genero.equals("Comedia")){
-            list = PeliculasComedia()
-        }else if(genero.equals("Ciencia Ficción")){
+        // Log.d("asas",album.toString())
 
-        }else if(genero.equals("Documentales")){
+        if (album.equals("YHLQSMDLG")){
+            list = yhlqsmdlg()
+        }else if(album.equals("Comedia")){
+        }else if(album.equals("Ciencia Ficción")){
 
-        }else if(genero.equals("Drama")){
+        }else if(album.equals("Documentales")){
 
-        }else if(genero.equals("Fantasia")){
+        }else if(album.equals("Drama")){
 
-        }else if(genero.equals("Romance")){
+        }else if(album.equals("Fantasia")){
 
-        }else if(genero.equals("Terror")){
+        }else if(album.equals("Romance")){
+
+        }else if(album.equals("Terror")){
 
         }
         

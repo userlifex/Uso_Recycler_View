@@ -15,6 +15,7 @@
  */
 package com.example.wordsapp
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -25,42 +26,15 @@ import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_pelicula.view.*
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_cancion.view.*
 
 /**
  * Adapter for the [RecyclerView] in [DetailActivity].
  */
-class WordAdapter(private var lista: ArrayList<Pelicula>,private var contexto: Context) :
+class WordAdapter(private var lista: ArrayList<Cancion>, private var contexto: Context) :
     RecyclerView.Adapter<WordAdapter.ViewHolder>() {
 
-    //private val filteredWords: List<String>
-
-    /*init {
-        // Retrieve the list of words from res/values/arrays.xml
-        val words = context.resources.getStringArray(R.array.words).toList()
-
-        filteredWords = words
-            // Returns items in a collection if the conditional clause is true,
-            // in this case if an item starts with the given letter,
-            // ignoring UPPERCASE or lowercase.
-            .filter { it.startsWith(letterId, ignoreCase = true) }
-            // Returns a collection that it has shuffled in place
-            .shuffled()
-            // Returns the first n items as a [List]
-            .take(5)
-            // Returns a sorted version of that [List]
-            .sorted()
-    }*/
-
-
-    // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
-    /*holder.button.setOnClickListener {
-        val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${item}")
-        val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-        context.startActivity(intent)
-    }*/
-    // Setup custom accessibility delegate to set the text read with
-    // an accessibility service
     companion object Accessibility : View.AccessibilityDelegate() {
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onInitializeAccessibilityNodeInfo(
@@ -83,12 +57,9 @@ class WordAdapter(private var lista: ArrayList<Pelicula>,private var contexto: C
     }
 
     class ViewHolder(var vista:View, var contexto: Context):RecyclerView.ViewHolder(vista){
-        fun bind(pelicula: Pelicula) {
-            vista.imagen.setImageResource(pelicula.idImagen)
-            vista.titulo.text = pelicula.titulo
-
-            vista.setOnClickListener{
-                val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${pelicula.titulo}")
+        fun bind(cancion: Cancion) {
+            vista.btnGoogle.setOnClickListener{
+                val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${cancion.titulo}")
                 val intent = Intent(Intent.ACTION_VIEW, queryUrl)
                 contexto.startActivity(intent)
             }
@@ -96,14 +67,38 @@ class WordAdapter(private var lista: ArrayList<Pelicula>,private var contexto: C
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_pelicula,parent,false),contexto)
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_cancion,parent,false),contexto)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(lista[position])
+        val item = lista[position]
+        holder.vista.titulo.text = item.titulo
+        Picasso.get().load(item.urlImage).into(holder.vista.imagen)
+
+        holder.vista.btnGoogle.setOnClickListener{
+            val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${item.titulo}")
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+            contexto.startActivity(intent)
+        }
+
+        holder.vista.btnYoutube.setOnClickListener{
+            openYoutube(item.yotubeId)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return lista.size
+    }
+
+    fun openYoutube(id: String){
+        val intentApp = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id))
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + id))
+        try {
+            contexto.startActivity(intentApp)
+        } catch (ex: ActivityNotFoundException) {
+            contexto.startActivity(intentBrowser)
+        }
+
     }
 }
