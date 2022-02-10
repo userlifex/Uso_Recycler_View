@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="albumns">
+        <item>YHLQSMDLG</item>
+        <item>Las que no iban a salir</item>
+        <item>El ultimo tour del mundo</item>
+        <item>UP NEXT</item>
+        <item>Oasis</item>
+        <item>El conejo Malo</item>
+    </string-array>
+</resources>
